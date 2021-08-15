@@ -1,0 +1,25 @@
+{
+  "name": "npnode",
+  "version": "1.0.0",
+  "description": "Collection of algorithms solving common np problems",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JTHorn-eng/npnode.git"
+  },
+  "keywords": [
+    "np",
+    "algorithm",
+    "hard",
+    "typescript"
+  ],
+  "author": "JTHorn-eng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JTHorn-eng/npnode/issues"
+  },
+  "homepage": "https://github.com/JTHorn-eng/npnode#readme"
+}
