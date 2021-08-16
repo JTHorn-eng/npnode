@@ -1,21 +1,45 @@
-enum Token {
-    True = "1",
-    False = "0",
-    And = "*",
-    Or = "+",
-    Literal = "^[a-z]",
-    LBrace = "(",
-    RBrace = ")"
+
+
+class Variable {
+    val:Number=0;
+    name:string="";
+    constructor(name:string) {
+        this.name = name;
+    }
+
+    setValue(num:Number) {
+        this.val = num;
+    }
+
+    value() {
+        return this.val;
+    }
 }
 
 class Expr {
 
     nestedExpr:(Number | Expr) = 0;
-    operation = [];
-    operands = [];
+    operation:any;
+    operands:any;
+
+    setNested(exp:Expr) {
+        this.nestedExpr = exp;
+    }
+    addOperation(ope:string) {
+        this.operation.push(ope);
+    }
+    addOperand(operand:(Variable|Expr)) {
+        this.operands.push(operand);
+    }
 
     evaluate() {
-        for (op in operation)
+        for (let op in this.operation) {
+            if (op === "+") {
+                
+            } else if (op === "*") {
+
+            }
+        }
     }
    
 }
@@ -24,7 +48,7 @@ class SAT {
 
     constructor(exp:String) {
         let expressionString = exp;
-        let expressionLiteral = [];
+        let exprLiteral = new Expr();
     }
 
     convertToCNF(exp:String) {
