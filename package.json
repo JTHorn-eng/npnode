@@ -4,6 +4,7 @@
   "description": "Collection of algorithms solving common np problems",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/JTHorn-eng/npnode/issues"
   },
-  "homepage": "https://github.com/JTHorn-eng/npnode#readme"
+  "homepage": "https://github.com/JTHorn-eng/npnode#readme",
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
 }
