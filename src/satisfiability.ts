@@ -1,55 +1,57 @@
-enum Token {
-    True = "1",
-    False = "0",
-    And = "*",
-    Or = "+",
-    Literal = "^[a-z]",
-    LBrace = "(",
-    RBrace = ")"
-}
-
 class Expr {
 
     nestedExpr:(Number | Expr) = 0;
     operation = [];
     operands = [];
-
+    addResults:any;
     evaluate() {
-        for (op in operation)
+        this.addResults = [];
+        let addIndex = 0;
+        while (addIndex != this.operation.length) {
+            if (this.operation[addIndex] === "+") {
+                if (this.operation[addIndex + 1] === "+") {
+                    this.addResults[addIndex - 1] += this.operands[addIndex];
+                } else {
+                    this.addResults.push(
+                        this.operands[addIndex] + this.operands[addIndex + 1]
+                        );
+                }
+                this.operation.pop();
+            }
+            
+            addIndex+= 1;
+        }
+
+        if (this.operation != []) {
+            return this.operands.reduce(this.multiplyAcc, 1);
+        } else {
+            return this.operands[0];
+        }
+
     }
+    multiplyAcc(total: number, num:number ) {
+        return total * num;
+    } 
    
 }
 
 class SAT {
-
-    constructor(exp:String) {
-        let expressionString = exp;
-        let expressionLiteral = [];
-    }
-
-    convertToCNF(exp:String) {
-
+    expLiteral:any = [];
+    expString = "";
+    expIndex = 0;
+    constructor(exp:string) {
+        this.expString = exp;
+        
     }
 
     //rewrite into CNF
-    parseExpression(exp:String) {
-
-        let groupStack = [];
-        let index = 0;
-        let groupStackPointer = 0;
-        let length: Number = exp.length;
+    parseGroup() {
+        this.expLiteral.push();
         
-        while (index != length) {
-            let current = "";
-            switch(exp.charAt(index)) {
-                case Token.True: 
-                    groupStack.push(1) 
-                    break;
-                case Token.False:
-                    val.push(0)
-                    break;
-            }
-            index += 1;
-        }
+        
+
+
+
+
     }
 }
