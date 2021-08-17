@@ -1,8 +1,8 @@
 class Expr {
 
     nestedExpr:(Number | Expr) = 0;
-    operation = [];
-    operands = [];
+    operation:any = [];
+    operands:any = [];
     addResults:any;
     evaluate() {
         this.addResults = [];
@@ -35,20 +35,78 @@ class Expr {
    
 }
 
-class SAT {
+class Var {
 
-    constructor(exp:String) {
-        let expressionString = exp;
-        let exprLiteral = new Expr();
+    value = 0;
+    name = "";
+
+    setValue(name:string) {
+        this.name = name;
     }
 
+    getValue() {
+        return this.value;
+    }
+
+}
+
+
+class SAT {
+
+
+    
+    exprString:string = "";
+    exStrInd = 0;
+    varRegExp = new RegExp("^[a-zA-Z0-9]");
+    constructor(exp:string) {
+        this.exprString = exp;
+        let exprLiteral = new Expr();
+        
+    }   
+
+   
+
     //rewrite into CNF
-    parseGroup() {
+    parse(){
+        let newExpr = new Expr();
+        let runParse = true;
+        let curVar = "";
+        while (runParse) {
+            if (this.varRegExp.test(this.exprString[this.exStrInd])) {
+                curVar.concat(this.exprString[this.exStrInd]);
+            } else {
+
+                if (curVar != "") {
+                    let vare = new Var();
+                    vare.name = curVar;
+                    vare.value = 0;
+                    newExpr.operands.push(vare);
+
+                    //reset curVar
+                    curVar = "";
+                } 
+                
+                if (this.exprString[this.exStrInd] === "(") {
+                    runParse = false;
+                    newExpr.nestedExpr = this.parse();
+                    
+                } else if (this.exprString[this.exStrInd] === "+" ) {
+                    newExpr.operation.push("+");
+                    
+    
+                } else if (this.exprString[this.exStrInd] === "*") {
+                    newExpr.operation.push("*");
+                    
+    
+                }
+            }
+            
+
+            
+            this.exStrInd += 1;
+        }
         
         
-
-
-
-
+        return newExpr;
     }
 }
