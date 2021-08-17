@@ -36,17 +36,14 @@ class Expr {
 }
 
 class SAT {
-    expLiteral:any = [];
-    expString = "";
-    expIndex = 0;
-    constructor(exp:string) {
-        this.expString = exp;
-        
+
+    constructor(exp:String) {
+        let expressionString = exp;
+        let exprLiteral = new Expr();
     }
 
     //rewrite into CNF
     parseGroup() {
-        this.expLiteral.push();
         
         
 
