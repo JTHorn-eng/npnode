@@ -4,6 +4,7 @@ class Expr {
     operation:any = [];
     operands:any = [];
     addResults:any;
+
     evaluate() {
         this.addResults = [];
         let addIndex = 0;
@@ -47,24 +48,18 @@ class Var {
     getValue() {
         return this.value;
     }
-
 }
 
-
 class SAT {
-
-
     
     exprString:string = "";
     exStrInd = 0;
     varRegExp = new RegExp("^[a-zA-Z0-9]");
+
     constructor(exp:string) {
         this.exprString = exp;
         let exprLiteral = new Expr();
-        
     }   
-
-   
 
     //rewrite into CNF
     parse(){
@@ -85,28 +80,27 @@ class SAT {
                     //reset curVar
                     curVar = "";
                 } 
-                
+
                 if (this.exprString[this.exStrInd] === "(") {
                     runParse = false;
                     newExpr.nestedExpr = this.parse();
-                    
                 } else if (this.exprString[this.exStrInd] === "+" ) {
                     newExpr.operation.push("+");
-                    
-    
                 } else if (this.exprString[this.exStrInd] === "*") {
                     newExpr.operation.push("*");
-                    
-    
                 }
             }
-            
-
-            
             this.exStrInd += 1;
         }
-        
-        
         return newExpr;
     }
+
+    dpll() {
+        
+
+
+
+    }
+
+
 }
