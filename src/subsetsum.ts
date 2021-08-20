@@ -41,7 +41,49 @@ class SubsetSum {
         return store[n][target];
     }
 
+    optimum(i:number, c:number, weight:number, value:number, table:[[number]]) {
+        if (i == 0) {
+            return 0;
+        } else if (weight > c) {
+            return table[i - 1][c];
+        } else {
+            return Math.max(table[i - 1][c], value + table[i - 1][c - weight]);
+        }
 
+    }
+    knapsack(values:[number], weights:[number], cap:number) {
+        let i = 0;
+        let col = 0;
+        let table:any= [[]];
+
+
+        while (i * values.length + col < (cap + 1) * values.length) {
+            if (col == cap) {
+                table.push([]);
+            }
+            table[i][col] = this.optimum(i, col, weights[i], values[i], table);
+
+        }
+
+        //find solution
+        let numbers:any = [];
+        i = table.length;
+        col = cap;
+        while (i > 0 && col > 0) {
+            if (table[i][col] != table[i - 1 ][col]) {
+                numbers.push(i);
+                col = col - weights[i];
+            }
+            i -= 1;
+        };
+
+        return numbers;
+
+
+
+
+
+    }
 
 
 }
