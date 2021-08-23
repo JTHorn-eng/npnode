@@ -1,4 +1,4 @@
-class SubsetSum {
+class Numerical {
 
     target:number = 0;
     numbers:any;
@@ -62,7 +62,7 @@ class SubsetSum {
                 table.push([]);
             }
             table[i][col] = this.optimum(i, col, weights[i], values[i], table);
-
+ 
         }
 
         //find solution
@@ -78,10 +78,6 @@ class SubsetSum {
         };
 
         return numbers;
-
-
-
-
 
     }
 
