@@ -1,4 +1,5 @@
-class Tool {
+import {GNode, GEdge} from './graph';
+export class Tool {
 
     powerSet(elements:[any]) {
         let powerset:any = [];
@@ -22,4 +23,29 @@ class Tool {
     dec2bin(dec:number) {
         return (dec >>> 0).toString(2);
     }
+
+    findPairs(list:[GNode]) {
+        if (list.length > 2) {
+            let p1 = 0;
+            let p2 = 1;
+            let pairs:any;
+            while (p1 != list.length - 1) {
+                pairs.push([list[p1], list[p2]]);
+                if (p2 == list.length) {
+                    p1 +=1;
+                    p2 = p1 + 1;
+                }
+                p2+= 1;
+            }
+            return pairs;
+
+        } else {
+            return list;
+        }
+    }
+
+    edgeToString(nodes:any) {
+        return nodes[0].value.toString() +"/" + nodes[1].value.toString();
+    }
+
 }

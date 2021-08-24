@@ -1,49 +1,56 @@
-class GraphNode {
+import {Tool} from './toolkit';
 
-    name:string = "";
-    connections:([[string]] | [string, number]) = [["root"]];
+
+export class GNode {
+
+    value:any;
     constructor() {
-    
+        this.value = 0;
     } 
 
     getName() {
-        return this.name;
-    }
-
-    getconnections() {
-        return this.connections;
-    }
-
-    add(edge:any) {
-        this.connections.push(edge)
-    }
-
-    isWeighted() {
-        if (this.connections[0].length == 0) {
-            return false;
-        } else {
-            return this.connections[0].length == 2;
-        }
+        return this.value;
     }
 }
 
+export class GEdge {
+    id = "";
+    weight = 0;
+    
+}
 
-class Graph {
+
+export class Graph {
 
     directed:boolean = true;
     bidirectional:boolean = true;
     weighted:boolean = true;
-    vertices:[GraphNode] = [new GraphNode()];
+    vertices:[GNode] = [new GNode()];
+    tool=new Tool();
+    edges:any;
 
-
-    isIndependentSet() {
-
-        for (let node in this.vertices) {
-            //todo!
-        }
-
-
+    constructor(edges:Map<string, [GNode]>, vertices:[GNode]){
+        this.edges = edges;
+        this.vertices = vertices;
     }
 
+    isAdjacent(set:[GNode], edges:Map<string, [GNode]>) {
+        return edges.has(this.tool.edgeToString(set));
+    }
 
+    isIndependentSet() {
+        let powerset = this.tool.powerSet(this.vertices);
+        for (let node in this.vertices) {
+            
+            //certifier
+            for (let set of powerset) {
+                if (this.isAdjacent(this.tool.findPairs(set), this.edges)) {
+                    return false;
+                }
+            }
+        
+
+        }
+        return true;
+    }
 }
