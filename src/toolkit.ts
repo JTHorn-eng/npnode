@@ -1,8 +1,8 @@
 import {GNode, GEdge} from './graph';
 export class Tool {
 
-    powerSet(elements:[any]) {
-        let powerset:any = [];
+    powerSet(elements:any[]) {
+        let powerset:any[] = [];
         let index:number = 0;
         while (index != (2^(elements.length))) {
             let temp = [];
@@ -46,6 +46,16 @@ export class Tool {
 
     edgeToString(nodes:any) {
         return nodes[0].value.toString() +"/" + nodes[1].value.toString();
+    }
+
+    filterByLength(len:number, list:any[]) {
+        let final:any[] = [];
+        for (let i of list) {
+            if (i.length > len) {
+                final.push(i);
+            }
+        }
+        return final;
     }
 
 }

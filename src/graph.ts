@@ -15,10 +15,8 @@ export class GNode {
 
 export class GEdge {
     id = "";
-    weight = 0;
-    
+    weight = 0;    
 }
-
 
 export class Graph {
 
@@ -38,19 +36,37 @@ export class Graph {
         return edges.has(this.tool.edgeToString(set));
     }
 
-    isIndependentSet() {
-        let powerset = this.tool.powerSet(this.vertices);
+    isIndependentSet(vertices:any[], size:number) {
+        let powerset = this.tool.filterByLength(size,this.tool.powerSet(vertices))
+
         for (let node in this.vertices) {
-            
+    
             //certifier
             for (let set of powerset) {
                 if (this.isAdjacent(this.tool.findPairs(set), this.edges)) {
                     return false;
                 }
             }
-        
-
         }
         return true;
+    }
+
+    setDifference(x:any[], graph:any[]):any[] {
+        let g:any[] = graph;
+        let xNodes:any[] = x;
+        let newList:any[] = [];
+        for (let node of xNodes) {
+            for (let gNode of g) {
+                if (gNode !== node) {
+                    newList.push(node);
+                }
+            }
+        }
+        return newList;
+    }
+
+    isVertexCover(vcNodes:any[], graphNodes:any[], k:number) {
+        let set = this.setDifference(vcNodes, graphNodes)
+        return this.isIndependentSet(set, graphNodes.length - k)
     }
 }
