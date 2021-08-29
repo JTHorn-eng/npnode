@@ -1,6 +1,5 @@
 import {Tool} from './toolkit';
 
-
 export class GNode {
 
     value:any;
@@ -25,7 +24,7 @@ export class Graph {
     weighted:boolean = true;
     vertices:[GNode] = [new GNode()];
     tool=new Tool();
-    edges:any;
+    edges:Map<string, [GNode]>;
 
     constructor(edges:Map<string, [GNode]>, vertices:[GNode]){
         this.edges = edges;
@@ -51,10 +50,10 @@ export class Graph {
         return true;
     }
 
-    setDifference(x:any[], graph:any[]):any[] {
-        let g:any[] = graph;
-        let xNodes:any[] = x;
-        let newList:any[] = [];
+    setDifference(graph:Graph, vertices:GNode[]):any[] {
+        let g:GNode[] = graph.vertices;
+        let xNodes:GNode[] = g;
+        let newList:GNode[] = [];
         for (let node of xNodes) {
             for (let gNode of g) {
                 if (gNode !== node) {
@@ -65,8 +64,32 @@ export class Graph {
         return newList;
     }
 
-    isVertexCover(vcNodes:any[], graphNodes:any[], k:number) {
-        let set = this.setDifference(vcNodes, graphNodes)
+    isVertexCover(graph:Graph, graphNodes:GNode[], k:number) {
+        let set = this.setDifference(graph, graphNodes)
         return this.isIndependentSet(set, graphNodes.length - k)
+    }
+
+    findVertexCover(graph:Graph, k:number) {
+        if (!this.isVertexCover(graph, graphNodes, k)) {
+            return [];
+        }
+        let c:any[] =[];
+        for (let vertex of graphNodes) {
+            
+
+
+        }
+    }
+
+    isSetCover(size:number, targetSet:any[]) {
+        let k = size;
+        let U = targetSet;
+        let setCoverSets:any[] = [];
+        this.edges.forEach((e) => {
+            setCoverSets.push(e);
+        });
+         
+
+
     }
 }

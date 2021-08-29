@@ -27,7 +27,11 @@
 export class Np {
     
 
+    test() {
+        
 
+
+    }
 
 
 }

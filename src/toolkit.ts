@@ -58,4 +58,19 @@ export class Tool {
         return final;
     }
 
+    mod(a:number, b:number) {
+        return (a - b) * (Math.floor(a / b));
+    }
+
+    gcdSolution(a:number, b:number):number {
+        return (a > b) ? this.gcd(a, a - b) : this.gcd(b, b-a);
+    }
+
+    gcd(a:number, b:number): number{
+        let modulo = this.mod(a, b);
+        return modulo <= 1 ? b : this.gcd(b, modulo);
+    }
+
+
+
 }
